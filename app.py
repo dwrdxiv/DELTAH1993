@@ -13,16 +13,16 @@ class FacturaAPI:
     def generar_pdf(self, payload):
         try:
             cliente = payload.get("cliente", {})
-            conductor = payload.get("conductor", {})
+            factura = payload.get("factura", {})
             items = payload.get("items", [])
             nombre_archivo = payload.get("nombre_archivo", "factura_salida").strip()
 
             if not nombre_archivo:
-                nombre_archivo = "factura_salida"
+                nombre_archivo = "factura"
 
             # Formato en mm: (ancho, alto). Ajusta con las medidas que tomaste
-            ancho_mm = float(payload.get("ancho_mm", 215.9))
-            alto_mm = float(payload.get("alto_mm", 279.4))
+            ancho_mm = float(payload.get("ancho_mm", 210))
+            alto_mm = float(payload.get("alto_mm", 281))
 
             pdf = FPDF(orientation='P', unit='mm', format=(ancho_mm, alto_mm))
             pdf.add_page()
@@ -30,26 +30,23 @@ class FacturaAPI:
 
             # === ENCABEZADO / CLIENTE (Coordenadas milimétricas) ===
             pdf.set_xy(30, 40)
-            pdf.cell(80, 5, txt=str(cliente.get("nombre", "")))
+            pdf.cell(80, 5, text=str(cliente.get("nombre", "")))
             
             pdf.set_xy(140, 40)
-            pdf.cell(40, 5, txt=str(cliente.get("rif", "")))
+            pdf.cell(40, 5, text=str(cliente.get("rif", "")))
 
             pdf.set_xy(30, 48)
-            pdf.cell(100, 5, txt=str(cliente.get("domicilio", "")))
+            pdf.cell(100, 5, text=str(cliente.get("domicilio", "")))
 
             pdf.set_xy(140, 48)
-            pdf.cell(40, 5, txt=str(cliente.get("telefono", "")))
+            pdf.cell(40, 5, text=str(cliente.get("orden", "")))
 
-            # === FECHA / CONDUCTOR ===
+            # === FECHA / FACTURA ===
             pdf.set_xy(140, 32)
-            pdf.cell(40, 5, txt=str(payload.get("fecha", "")))
+            pdf.cell(40, 5, text=str(payload.get("fecha", "")))
 
             pdf.set_xy(30, 60)
-            pdf.cell(80, 5, txt=str(conductor.get("nombre", "")))
-
-            pdf.set_xy(140, 60)
-            pdf.cell(40, 5, txt=str(conductor.get("placa", "")))
+            pdf.cell(80, 5, text=str(factura.get("numero", "")))
 
             # === RENGLONES DE LA TABLA ===
             y_inicial = 85   # Milímetros desde arriba donde inicia el primer renglón
@@ -59,16 +56,16 @@ class FacturaAPI:
                 y = y_inicial + (i * alto_fila)
                 
                 pdf.set_xy(15, y)
-                pdf.cell(15, 5, txt=str(item.get("cant", "")))
+                pdf.cell(15, 5, text=str(item.get("cant", "")))
                 
                 pdf.set_xy(35, y)
-                pdf.cell(90, 5, txt=str(item.get("descripcion", "")))
+                pdf.cell(90, 5, text=str(item.get("descripcion", "")))
                 
                 pdf.set_xy(135, y)
-                pdf.cell(25, 5, txt=f"{float(item.get('precio', 0)):.2f}")
+                pdf.cell(25, 5, text=f"{float(item.get('precio', 0)):.2f}")
                 
                 pdf.set_xy(165, y)
-                pdf.cell(30, 5, txt=f"{float(item.get('total', 0)):.2f}")
+                pdf.cell(30, 5, text=f"{float(item.get('total', 0)):.2f}")
 
             ruta_salida = f"{nombre_archivo}.pdf"
             pdf.output(ruta_salida)
@@ -86,8 +83,8 @@ def main():
         title="Generador de Facturas",
         url=html_path,
         js_api=api,
-        width=1100,
-        height=720,
+        width=800,
+        height=600,
         min_size=(900, 600)
     )
     webview.start(debug=True)  # debug=True permite clic derecho -> inspeccionar elemento

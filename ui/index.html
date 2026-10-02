@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Facturación</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h2>DELTA H 1993, C.A.</h2>
+      <div id="status-badge" class="badge">Listo</div>
+    </header>
+
+    <div class="grid-sections">
+      <!-- Datos del Cliente -->
+      <fieldset class="panel">
+        <legend>Datos del Cliente</legend>
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="cli-nombre">Nombre / Razón Social</label>
+            <input type="text" id="cli-nombre" autocomplete="off">
+          </div>
+          <div class="form-group flex-1">
+            <label for="cli-rif">C.I / RIF</label>
+            <input type="text" id="cli-rif" autocomplete="off">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group flex-2">
+            <label for="cli-domicilio">Domicilio Fiscal</label>
+            <input type="text" id="cli-domicilio" autocomplete="off">
+          </div>
+          <div class="form-group flex-1">
+            <label for="cli-telefono">Orden de Entrega</label>
+            <input type="text" id="cli-orden" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Datos de Factura -->
+      <fieldset class="panel">
+        <legend>Datos de Factura</legend>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="doc-fecha">Fecha</label>
+            <input type="date" id="doc-fecha">
+          </div>
+          <div class="form-group flex-1">
+            <label for="pdf-nombre">Numero de Factura</label>
+            <input type="text" id="pdf-nombre" autocomplete="off">
+          </div>
+        </div>
+      </fieldset>
+    </div>
+
+    <!-- Carga de Items -->
+    <fieldset class="panel">
+      <legend>Agregar Item</legend>
+      <form id="form-item" class="form-row">
+        <div class="form-group" style="width: 60px;">
+          <label for="item-cant">Cant.</label>
+          <input type="number" id="item-cant" min="1" step="1">
+        </div>
+        <div class="form-group flex-2">
+          <label for="item-desc">Descripción</label>
+          <input type="text" id="item-desc" autocomplete="off">
+        </div>
+        <div class="form-group" style="width: 100px;">
+          <label for="item-precio">Precio Unit.</label>
+          <input type="number" id="item-precio" step="0.01">
+        </div>
+        <div class="form-group" style="width: 100px;">
+          <label for="item-alic">Alic.</label>
+          <input type="checkbox" id="item-alic" title="Aplicar alícuota de IVA">
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-bottom: 2px;">Agregar</button>
+      </form>
+    </fieldset>
+
+    <!-- Tabla de Renglones -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 50px;">#</th>
+            <th style="width: 80px;">Cant.</th>
+            <th>Descripción</th>
+            <th style="width: 120px;">Precio</th>
+            <th style="width: 80px;">Alic.</th>
+            <th style="width: 120px;">Total</th>
+            <th style="width: 80px;">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tabla-body">
+          <!-- Render dinámico desde JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Barra de Acciones Final -->
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="totales">
+          <div class="total-item">
+            <span>Base Imponible:</span>
+            <span id="total-base">0.00</span>
+
+            <span>Exento:</span>
+            <span id="total-exento">0.00</span>
+
+            <span>Iva:</span>
+            <span id="total-iva">0.00</span>
+
+            <span>Total:</span>
+            <span id="total-general">0.00</span>
+          </div>
+      <div class="footer-right">
+        <button id="btn-limpiar" class="btn btn-danger">Borrar Todo</button>
+        <button id="btn-generar" class="btn btn-success">Generar Factura (PDF)</button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
