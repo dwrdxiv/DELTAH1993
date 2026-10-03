@@ -43,9 +43,16 @@
       <fieldset class="panel">
         <legend>Datos de Factura</legend>
         <div class="form-row">
-          <div class="form-group">
-            <label for="doc-fecha">Fecha</label>
-            <input type="date" id="doc-fecha">
+          <label>Fecha de Emisión</label>
+          <div class="fecha-container">
+            <input type="text" id="doc-dia" placeholder="DD" maxlength="2" inputmode="numeric"
+              class="input-fecha input-corto">
+            <span class="separador-fecha">/</span>
+            <input type="text" id="doc-mes" placeholder="MM" maxlength="2" inputmode="numeric"
+              class="input-fecha input-corto">
+            <span class="separador-fecha">/</span>
+            <input type="text" id="doc-anio" placeholder="AAAA" maxlength="4" inputmode="numeric"
+              class="input-fecha input-largo">
           </div>
           <div class="form-group flex-1">
             <label for="pdf-nombre">Numero de Factura</label>
@@ -71,9 +78,11 @@
           <label for="item-precio">Precio Unit.</label>
           <input type="number" id="item-precio" step="0.01">
         </div>
-        <div class="form-group" style="width: 100px;">
-          <label for="item-alic">Alic.</label>
-          <input type="checkbox" id="item-alic" title="Aplicar alícuota de IVA">
+        <div class="form-group" style="align-items: center; justify-content: flex-end; padding-bottom: 6px;">
+          <label for="item-iva" style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
+            <input type="checkbox" id="item-iva" style="cursor: pointer;">
+            <span>+IVA (16%)</span>
+          </label>
         </div>
         <button type="submit" class="btn btn-primary" style="margin-bottom: 2px;">Agregar</button>
       </form>
@@ -87,9 +96,9 @@
             <th style="width: 50px;">#</th>
             <th style="width: 80px;">Cant.</th>
             <th>Descripción</th>
-            <th style="width: 120px;">Precio</th>
-            <th style="width: 80px;">Alic.</th>
-            <th style="width: 120px;">Total</th>
+            <th style="width: 120px;">Precio Unit.</th>
+            <th style="width: 80px;">IVA</th>
+            <th style="width: 110px;">Total</th>
             <th style="width: 80px;">Acción</th>
           </tr>
         </thead>
@@ -102,25 +111,33 @@
     <!-- Barra de Acciones Final -->
     <footer class="footer">
       <div class="footer-left">
-        <div class="totales">
-          <div class="total-item">
-            <span>Base Imponible:</span>
-            <span id="total-base">0.00</span>
-
-            <span>Exento:</span>
-            <span id="total-exento">0.00</span>
-
-            <span>Iva:</span>
-            <span id="total-iva">0.00</span>
-
-            <span>Total:</span>
-            <span id="total-general">0.00</span>
+        <div class="totales-container">
+          <div class="total-group">
+            <span class="total-label">Base Imp:</span>
+            <span id="total-base" class="total-monto">0.00</span>
           </div>
+          <div class="total-group">
+            <span class="total-label">Exento:</span>
+            <span id="total-exento" class="total-monto">0.00</span>
+          </div>
+          <div class="total-group">
+            <span class="total-label">IVA (16%):</span>
+            <span id="total-iva" class="total-monto">0.00</span>
+          </div>
+          <div class="total-group total-destacado">
+            <span class="total-label">Total:</span>
+            <span id="total-general" class="total-monto">0.00</span>
+          </div>
+        </div>
+      </div>
+    
       <div class="footer-right">
+        <input type="text" id="pdf-nombre" placeholder="Nombre archivo (opcional)" style="width: 180px; margin-right: 8px;">
         <button id="btn-limpiar" class="btn btn-danger">Borrar Todo</button>
         <button id="btn-generar" class="btn btn-success">Generar Factura (PDF)</button>
       </div>
     </footer>
+
   </div>
 
   <script src="js/app.js"></script>

@@ -112,6 +112,64 @@ th {
   color: #475569;
 }
 
+.totales-container {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.total-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.total-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.fecha-container {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.input-fecha {
+  text-align: center;
+  padding: 6px 4px;
+}
+
+.input-corto {
+  width: 42px;
+}
+
+.input-largo {
+  width: 60px;
+}
+
+.separador-fecha {
+  color: #64748b;
+  font-weight: 600;
+  user-select: none;
+}
+
+.total-monto {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.total-destacado .total-label {
+  color: #2563eb;
+}
+
+.total-destacado .total-monto {
+  font-size: 16px;
+  color: #2563eb;
+}
+
 .btn {
   border: none;
   border-radius: 5px;
