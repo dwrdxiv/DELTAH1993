@@ -59,13 +59,14 @@ function calcularTotales() {
   let exento = 0;
 
   renglones.forEach(item => {
-    // subtotal = cant * precioBase
-    if (item.tieneIVA === true) {
-      baseImponible += item.subtotal;
+    const sub = Number(item.subtotal) || 0;
+    if (sub > 0) {
+      if (item.tieneIVA === true) {
+        baseImponible += sub;
     } else {
-      exento += item.subtotal;
-    }
-  });
+        exento += sub;
+      }
+  }});
 
   const iva = baseImponible * 0.16;
   const totalGeneral = baseImponible + iva + exento;
@@ -88,13 +89,20 @@ function renderizarTabla() {
   tablaBody.innerHTML = "";
   renglones.forEach((item, index) => {
     const tr = document.createElement("tr");
+
+    // Si es solo texto, dejamos celdas numéricas vacías
+    const textoCant = item.cant > 0 ? item.cant : "";
+    const textoPrecio = item.precioBase > 0 ? formatearMonto(item.precioBase) : "";
+    const textoIva = item.subtotal > 0 ? (item.tieneIVA ? "16%" : "Exento") : "";
+    const textoTotal = item.total > 0 ? formatearMonto(item.total) : "";
+
     tr.innerHTML = `
       <td>${index + 1}</td>
-      <td>${item.cant}</td>
+      <td>${textoCant}</td>
       <td>${item.descripcion}</td>
-      <td>${formatearMonto(item.precioBase)}</td>
-      <td>${item.tieneIVA ? "16%" : "Exento"}</td>
-      <td>${formatearMonto(item.subtotal)}</td>
+      <td>${textoPrecio}</td>
+      <td>${textoIva}</td>
+      <td>${textoTotal}</td>
       <td>
         <button class="btn btn-danger btn-sm" onclick="eliminarRenglon(${index})">Quitar</button>
       </td>
@@ -110,15 +118,20 @@ function eliminarRenglon(index) {
 
 formItem.addEventListener("submit", (e) => {
   e.preventDefault();
-  const cant = parseFloat(document.getElementById("item-cant").value);
   const descripcion = document.getElementById("item-desc").value.trim();
-  const precioBase = parseFloat(document.getElementById("item-precio").value);
-  const tieneIVA = Boolean(document.getElementById("item-iva").checked);
 
-  if (!cant || !descripcion || isNaN(precioBase) || precioBase <= 0) {
+  if (!descripcion) {
     mostrarEstado("Verifica los datos del renglón", "error");
     return;
   }
+
+  // Si están vacíos o no son números válidos, caen en 0
+  const cantRaw = parseFloat(document.getElementById("item-cant").value);
+  const cant = isNaN(cantRaw) ? 0 : cantRaw;
+
+  const precioRaw = parseFloat(document.getElementById("item-precio").value);
+  const precioBase = isNaN(precioRaw) ? 0 : precioRaw;
+  const tieneIVA = Boolean(document.getElementById("item-iva").checked);
   
   const subtotal = cant * precioBase;
   const total = tieneIVA ? subtotal * 1.16 : subtotal;
@@ -129,7 +142,8 @@ formItem.addEventListener("submit", (e) => {
     precioBase,
     tieneIVA,
     subtotal,
-    total
+    total,
+    esSoloTexto: (cant === 0 && precioBase === 0)
   });
 
   renderizarTabla();

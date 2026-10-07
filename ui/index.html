@@ -20,21 +20,21 @@
         <div class="form-row">
           <div class="form-group flex-2">
             <label for="cli-nombre">Nombre / Razón Social</label>
-            <input type="text" id="cli-nombre" autocomplete="off">
+            <input type="text" id="cli-nombre" maxlength="52" autocomplete="off">
           </div>
           <div class="form-group flex-1">
             <label for="cli-rif">C.I / RIF</label>
-            <input type="text" id="cli-rif" autocomplete="off">
+            <input type="text" id="cli-rif" maxlength="12" autocomplete="off">
           </div>
         </div>
         <div class="form-row">
           <div class="form-group flex-2">
             <label for="cli-domicilio">Domicilio Fiscal</label>
-            <input type="text" id="cli-domicilio" autocomplete="off">
+            <input type="text" id="cli-domicilio" maxlength="55" autocomplete="off">
           </div>
           <div class="form-group flex-1">
             <label for="cli-telefono">Orden de Entrega</label>
-            <input type="text" id="cli-orden" autocomplete="off">
+            <input type="text" id="cli-orden" maxlength="20" autocomplete="off">
           </div>
         </div>
       </fieldset>
@@ -132,7 +132,6 @@
       </div>
     
       <div class="footer-right">
-        <input type="text" id="pdf-nombre" placeholder="Nombre archivo (opcional)" style="width: 180px; margin-right: 8px;">
         <button id="btn-limpiar" class="btn btn-danger">Borrar Todo</button>
         <button id="btn-generar" class="btn btn-success">Generar Factura (PDF)</button>
       </div>
