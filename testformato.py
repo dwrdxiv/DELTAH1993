@@ -78,7 +78,7 @@ pdf.cell(13, 6, text="CANT.", border=1, align="C")
 pdf.cell(107, 6, text="DESCRIPCIÓN / CONCEPTO", border=1, align="C")
 pdf.cell(24, 6, text="P. UNITARIO", border=1, align="C")
 pdf.cell(11, 6, text="ALÍC.", border=1, align="C")
-pdf.cell(31, 6, text="TOTAL", border=1, align="C")
+pdf.cell(31, 6, text="SUBTOTAL", border=1, align="C")
 
 alto_cuerpo_tabla = 165 
 pdf.rect(14, y_tabla_inicio + 6, 186, alto_cuerpo_tabla) 
@@ -126,13 +126,13 @@ for i, item in enumerate(items):
 # --- RESUMEN DE TOTALES ---
 pdf.set_font("Helvetica", "B", 8)
 pdf.set_xy(135, 233)
-pdf.cell(32, 5, text="SUB-TOTAL", border=1, align="L")
+pdf.cell(32, 5, text="Base Imponible Bs.", border=1, align="L")
 pdf.set_font("Helvetica", "", 9)
 pdf.cell(33, 5, text=fmt_monto(300.00), border=1, align="R")
 
 pdf.set_font("Helvetica", "B", 8)
 pdf.set_xy(135, 238)
-pdf.cell(32, 5, text="MONTO EXENTO", border=1, align="L")
+pdf.cell(32, 5, text="Exento Bs.", border=1, align="L")
 pdf.set_font("Helvetica", "", 9)
 pdf.cell(33, 5, text=fmt_monto(200.00), border=1, align="R")
 
@@ -144,7 +144,7 @@ pdf.cell(33, 5, text=fmt_monto(48.00), border=1, align="R")
 
 pdf.set_font("Helvetica", "B", 9)
 pdf.set_xy(135, 248)
-pdf.cell(32, 7, text="TOTAL GENERAL", border=1, align="L")
+pdf.cell(32, 7, text="Total Bs.", border=1, align="L")
 pdf.cell(33, 7, text=fmt_monto(548.00), border=1, align="R")
 
 pdf.output("vista_previa_factura.pdf")
