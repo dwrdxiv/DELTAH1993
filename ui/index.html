@@ -20,7 +20,7 @@
         <div class="form-row">
           <div class="form-group flex-2">
             <label for="cli-nombre">Nombre / Razón Social</label>
-            <input type="text" id="cli-nombre" maxlength="52" autocomplete="off">
+            <input type="text" id="cli-nombre" maxlength="62" autocomplete="off">
           </div>
           <div class="form-group flex-1">
             <label for="cli-rif">C.I / RIF</label>
@@ -30,11 +30,11 @@
         <div class="form-row">
           <div class="form-group flex-2">
             <label for="cli-domicilio">Domicilio Fiscal</label>
-            <input type="text" id="cli-domicilio" maxlength="55" autocomplete="off">
+            <input type="text" id="cli-domicilio" maxlength="58" autocomplete="off">
           </div>
           <div class="form-group flex-1">
             <label for="cli-telefono">Orden de Entrega</label>
-            <input type="text" id="cli-orden" maxlength="20" autocomplete="off">
+            <input type="text" id="cli-orden" maxlength="14" autocomplete="off">
           </div>
         </div>
       </fieldset>
@@ -59,6 +59,12 @@
             <input type="text" id="pdf-nombre" autocomplete="off">
           </div>
         </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="pdf-orden">Metodo de Pago</label>
+            <input type="text" id="metodo" maxlength="12" autocomplete="off">
+          </div>
+        </div>
       </fieldset>
     </div>
 
@@ -72,7 +78,7 @@
         </div>
         <div class="form-group flex-2">
           <label for="item-desc">Descripción</label>
-          <input type="text" id="item-desc" maxlength="38 autocomplete="off">
+          <input type="text" id="item-desc" maxlength="41" autocomplete="off">
         </div>
         <div class="form-group" style="width: 100px;">
           <label for="item-precio">Precio Unit.</label>
@@ -81,7 +87,7 @@
         <div class="form-group" style="align-items: center; justify-content: flex-end; padding-bottom: 6px;">
           <label for="item-iva" style="cursor: pointer; display: flex; align-items: center; gap: 4px;">
             <input type="checkbox" id="item-iva" style="cursor: pointer;">
-            <span>+IVA (16%)</span>
+            <span>IVA</span>
           </label>
         </div>
         <button type="submit" class="btn btn-primary" style="margin-bottom: 2px;">Agregar</button>

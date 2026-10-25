@@ -14,7 +14,6 @@ const spanTotalGeneral = document.getElementById("total-general");
 const inputDia = document.getElementById("doc-dia");
 const inputMes = document.getElementById("doc-mes");
 const inputAno = document.getElementById("doc-anio");
-
 // 1. Cargar fecha actual por defecto (DD, MM, AAAA)
 function cargarFechaActual() {
   const hoy = new Date();
@@ -118,6 +117,10 @@ function eliminarRenglon(index) {
 
 formItem.addEventListener("submit", (e) => {
   e.preventDefault();
+  if (renglones.length >= 27) {
+    mostrarEstado("Máximo de 27 renglones alcanzado", "error");
+    return;
+  } 
   const descripcion = document.getElementById("item-desc").value.trim();
 
   if (!descripcion) {
@@ -183,9 +186,10 @@ btnGenerar.addEventListener("click", async () => {
       fecha: {
         dia: document.getElementById("doc-dia").value,
         mes: document.getElementById("doc-mes").value,
-        anio: document.getElementById("doc-anio").value
+        anio: document.getElementById("doc-anio").value,
       },
-      numero: document.getElementById("pdf-nombre").value
+      numero: document.getElementById("pdf-nombre").value,
+      metodo: document.getElementById("metodo").value
     },
     items: renglones,
     totales: resumenTotales,

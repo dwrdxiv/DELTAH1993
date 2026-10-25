@@ -98,7 +98,7 @@ class FacturaAPI:
             pdf.set_xy(137, 50)
             pdf.cell(28, 6, text="Metodo de Pago:", border=0)
             pdf.set_font("Helvetica", "", 9)
-            pdf.cell(30, 6, text="X DEFINIR", border="B", align="C")
+            pdf.cell(30, 6, text=str(factura.get("metodo", "")), border="B", align="C")
             
             # === RENGLONES DE LA TABLA ===
             y_tabla_inicio = 60
@@ -150,19 +150,19 @@ class FacturaAPI:
 
             # --- RESUMEN DE TOTALES ---
             pdf.set_font("Helvetica", "B", 9)
-            pdf.set_xy(135, 233)
+            pdf.set_xy(136, 233)
             pdf.cell(32, 5, text="Base Imponible Bs.", border=1, align="L")
             pdf.cell(32, 5, text=str(fmt_monto(totales.get("baseImponible", 0))), border=1, align="R")
 
-            pdf.set_xy(135, 238)
+            pdf.set_xy(136, 238)
             pdf.cell(32, 5, text="Exento Bs.", border=1, align="L")
             pdf.cell(32, 5, text=str(fmt_monto(totales.get("exento", 0))), border=1, align="R")
 
-            pdf.set_xy(135, 243)
-            pdf.cell(32, 5, text="I.V.A. (16%)", border=1, align="L")
+            pdf.set_xy(136, 243)
+            pdf.cell(32, 5, text="I.V.A. (16%) Bs.", border=1, align="L")
             pdf.cell(32, 5, text=str(fmt_monto(totales.get("iva", 0))), border=1, align="R")
 
-            pdf.set_xy(135, 248)
+            pdf.set_xy(136, 248)
             pdf.cell(32, 7, text="Total Bs.", border=1, align="L")
             pdf.cell(32, 7, text=str(fmt_monto(totales.get("totalGeneral", 0))), border=1, align="R")
 
@@ -186,7 +186,7 @@ def main():
         height=665,
         min_size=(900, 665)
     )
-    webview.start(debug=True)  # debug=True permite clic derecho -> inspeccionar elemento
+    webview.start()  # debug=True permite clic derecho -> inspeccionar elemento
 
 if __name__ == "__main__":
     main()
