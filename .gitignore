@@ -2,3 +2,9 @@
 .prettierrc
 app.spec
 .directory
+/salida_pruebas
+/__pycache__
+/build
+/dist
+*.pdf
+testformato.py

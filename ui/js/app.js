@@ -117,8 +117,8 @@ function eliminarRenglon(index) {
 
 formItem.addEventListener("submit", (e) => {
   e.preventDefault();
-  if (renglones.length >= 27) {
-    mostrarEstado("Máximo de 27 renglones alcanzado", "error");
+  if (renglones.length >= 25) {
+    mostrarEstado("Máximo de 25 renglones alcanzado", "error");
     return;
   } 
   const descripcion = document.getElementById("item-desc").value.trim();
